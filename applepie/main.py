@@ -28,4 +28,22 @@ def on_draw():
     label2.draw()
     image.blit(window.width//2-image.width//2,window.height//2-image.width//2+20)
 
+from pyglet.window import key
+
+@window.event
+def on_key_press(symbol, modifiers):
+    if symbol == key.A:
+        print("You pressed 'A'")
+    elif symbol == key.LEFT:
+        print("LEFT!")
+    elif symbol == key.RIGHT:
+        print("RIGHT!")
+    else:
+        print("You pressed something else.")
+
+    if symbol == key.A:
+        print("It is a nice key, huh?")
+    else:
+        print("Whew!")
+
 pyglet.app.run()
