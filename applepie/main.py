@@ -21,7 +21,8 @@ from pyglet.gl import *
 glEnable(GL_BLEND)
 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
-pos = [0,20]
+pos = [0,200]
+velocity = [0,0]
 
 @window.event
 def on_draw():
@@ -29,8 +30,8 @@ def on_draw():
     label1.draw()
     label2.draw()
     image.blit(
-        window.width//2-image.width//2+pos[0],
-        window.height//2-image.width//2+pos[1])
+        pos[0],
+        pos[1])
 
 from pyglet.window import key
 
@@ -44,5 +45,14 @@ def on_key_press(symbol, modifiers):
         pos[0] -= 10
     elif symbol == key.RIGHT:
         pos[0] += 10
+
+def update(dt):
+    if pos[1] > 0:
+        velocity[1] = velocity[1]-1
+
+    # Apply velocity to position.
+    pos[1] = max(0, pos[1]+velocity[1])
+
+pyglet.clock.schedule_interval(update, 0.1)
 
 pyglet.app.run()
