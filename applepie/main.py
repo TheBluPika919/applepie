@@ -21,29 +21,28 @@ from pyglet.gl import *
 glEnable(GL_BLEND)
 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
+pos = [0,20]
+
 @window.event
 def on_draw():
     window.clear()
     label1.draw()
     label2.draw()
-    image.blit(window.width//2-image.width//2,window.height//2-image.width//2+20)
+    image.blit(
+        window.width//2-image.width//2+pos[0],
+        window.height//2-image.width//2+pos[1])
 
 from pyglet.window import key
 
 @window.event
 def on_key_press(symbol, modifiers):
-    if symbol == key.A:
-        print("You pressed 'A'")
+    if symbol == key.UP:
+        pos[1] += 10
+    elif symbol == key.DOWN:
+        pos[1] -= 10
     elif symbol == key.LEFT:
-        print("LEFT!")
+        pos[0] -= 10
     elif symbol == key.RIGHT:
-        print("RIGHT!")
-    else:
-        print("You pressed something else.")
-
-    if symbol == key.A:
-        print("It is a nice key, huh?")
-    else:
-        print("Whew!")
+        pos[0] += 10
 
 pyglet.app.run()
